@@ -14,20 +14,20 @@ import org.jeasy.rules.annotation.*;
  */
 @Slf4j
 @Rule(name = "five")
-public class FiveRule {
-    @Condition
-    public boolean isFive(@Fact("model") CheckModel model) {
-        return model.getNumber() % 5 == 0;
+public class FiveRule extends BaseNumberRule {
+    @Priority
+    public int getPriority() {
+        return 2;
     }
 
-    @Action
-    public void fiveAction(@Fact("model") CheckModel model) {
+    @Override
+    protected void doAction(CheckModel model) {
         model.setScore(model.getScore() + 5);
         log.info("{} 能被 5 整除，得 5 分，当前得分 {}", model.getNumber(), model.getScore());
     }
 
-    @Priority
-    public int getPriority() {
-        return 2;
+    @Override
+    protected boolean getCondition(CheckModel model) {
+        return model.getNumber() % 5 == 0;
     }
 }

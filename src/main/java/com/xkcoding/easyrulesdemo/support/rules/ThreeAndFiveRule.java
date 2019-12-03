@@ -14,20 +14,20 @@ import org.jeasy.rules.annotation.*;
  */
 @Slf4j
 @Rule(name = "three and five")
-public class ThreeAndFiveRule {
-    @Condition
-    public boolean isThreeAndFive(@Fact("model") CheckModel model) {
-        return model.getNumber() % 3 == 0 && model.getNumber() % 5 == 0;
+public class ThreeAndFiveRule extends BaseNumberRule{
+    @Priority
+    public int getPriority() {
+        return 0;
     }
 
-    @Action
-    public void threeAndFiveAction(@Fact("model") CheckModel model) {
+    @Override
+    protected void doAction(CheckModel model) {
         model.setScore(model.getScore() + 10);
         log.info("{} 能被 3 整除也能被 5 整除，得 10 分，当前得分 {}", model.getNumber(), model.getScore());
     }
 
-    @Priority
-    public int getPriority() {
-        return 0;
+    @Override
+    protected boolean getCondition(CheckModel model) {
+        return model.getNumber() % 3 == 0 && model.getNumber() % 5 == 0;
     }
 }
