@@ -19,9 +19,9 @@ public class EasyRulesConfig {
     @Bean
     public RulesEngine rulesEngine() {
         // skipOnFirstAppliedRule: 匹配到第一条规则就跳过后面规则匹配
-        RulesEngineParameters parameters = new RulesEngineParameters().skipOnFirstAppliedRule(true);
-        return new DefaultRulesEngine(parameters);
+        // RulesEngineParameters parameters = new RulesEngineParameters().skipOnFirstAppliedRule(true);
+        // return new DefaultRulesEngine(parameters);
 
-        // return new DefaultRulesEngine();
+        return new DefaultRulesEngine();
     }
 }

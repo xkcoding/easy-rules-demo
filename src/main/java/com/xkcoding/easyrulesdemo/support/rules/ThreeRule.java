@@ -1,11 +1,12 @@
 package com.xkcoding.easyrulesdemo.support.rules;
 
 import com.xkcoding.easyrulesdemo.model.CheckModel;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.jeasy.rules.annotation.Action;
-import org.jeasy.rules.annotation.Fact;
 import org.jeasy.rules.annotation.Priority;
 import org.jeasy.rules.annotation.Rule;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -24,7 +25,10 @@ public class ThreeRule extends BaseNumberRule {
     }
 
     @Override
+    @SneakyThrows
     protected void doAction(CheckModel model) {
+        TimeUnit.SECONDS.sleep(5);
+
         model.setScore(model.getScore() + 3);
         log.info("{} 能被 3 整除，得 3 分，当前得分 {}", model.getNumber(), model.getScore());
     }
